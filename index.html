@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Solitario</h1>
+      <img src="/img/BocaAbajo.jpg" alt="Carta jugada" id="imagen-carta">
+      <div class="botones" id="botones">
+        <button id="dameCarta">Dame Carta</button>
+        <button id="plantarse">Me planto</button>
+        <button id="nuevaPartida" disabled>Nueva Partida</button>
+        <button id="queHubiesePasado" disabled>¿Qué hubiese pasado?</button>
+      </div>
+      <div id="resultado" class="resultado">
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
