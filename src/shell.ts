@@ -1,72 +1,10 @@
-import { partida } from "./modelo";
-import { dameCartaAleatoria, cambiarEstado, calcularPuntuaciónSegúnCarta } from "./motor";
-import {
-    sumarPuntuación,
-    mostrarCarta, 
-    mostrarPuntuación, 
-    mostrarMensajePlantarse,
-    mostrarMensajeGameOver,
-    mostrarMensajePosibleResultado,
-    disabledButtonDameCarta,
-    disabledButtonPlantarse,
-    disabledButtonNuevaPartida,
-    disabledButtonQueHubiesePasado,
-    comprobarEstadoBotónDameCarta,
-    activarBotónNuevaPartida,
-    activarBotónSaberMás,
-    activarBotones,
-    activarEstadoGameOver,
+import { 
+    jugarCarta,
+    plantase,
+    nuevaPartida,
+    saberMas
 } from "./ui";
 
-const comprobarPuntuación = () => {
-    if (partida.puntuacionUsuario == 7.5) {
-        mostrarMensajePlantarse(cambiarEstado());
-        disabledButtonDameCarta();
-        disabledButtonPlantarse();
-        activarBotónNuevaPartida(comprobarEstadoBotónDameCarta());
-    }
-   if (partida.puntuacionUsuario > 7.5) {
-       mostrarMensajeGameOver(activarEstadoGameOver());
-       activarBotónNuevaPartida(comprobarEstadoBotónDameCarta());
-   }
-}
-
-const jugarCarta = () => {
-    const cartaAleatoria = dameCartaAleatoria();
-    mostrarCarta(cartaAleatoria); 
-    sumarPuntuación(calcularPuntuaciónSegúnCarta(cartaAleatoria));
-    mostrarPuntuación();
-    comprobarPuntuación();
-}
-
-const plantase = () => {
-    const estadoActual = cambiarEstado();
-    mostrarMensajePlantarse(estadoActual);
-    disabledButtonDameCarta();
-    activarBotónNuevaPartida(comprobarEstadoBotónDameCarta());
-    activarBotónSaberMás();
-}
-
-const nuevaPartida = () => {
-    activarBotones();
-    partida.puntuacionUsuario = 0;
-    mostrarPuntuación();
-    disabledButtonNuevaPartida();
-    disabledButtonQueHubiesePasado();
-    mostrarCarta(0);
-}
-
-const saberMas = () => {
-    disabledButtonPlantarse();
-    const cartaAleatoria = dameCartaAleatoria();
-    mostrarCarta(cartaAleatoria);
-    sumarPuntuación(calcularPuntuaciónSegúnCarta(cartaAleatoria));    
-    mostrarPuntuación();
-    mostrarMensajePosibleResultado();
-    disabledButtonQueHubiesePasado();
-}
-
-document.addEventListener("DOMContentLoaded", mostrarPuntuación);
 
 const botonDarCarta = document.getElementById("dameCarta");
 botonDarCarta instanceof HTMLButtonElement

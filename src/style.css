@@ -14,6 +14,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 
 .botones button {
   background-color: #3179c682;

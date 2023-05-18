@@ -18,16 +18,18 @@ export const cambiarEstado = () : Estado => {
         return "GAME_OVER";
 }
 
-export const dameCartaAleatoria = () : number => {
-    const numeroAleatorio = Math.floor(Math.random()*10);
-    if(numeroAleatorio >= 8) {
-        return numeroAleatorio+2;
-    }
-    return numeroAleatorio;
- }
+export const crearNumeroAleatorio = () : number => {
+    return Math.ceil(Math.random()*10)
+}
 
-export const calcularPuntuaciónSegúnCarta = (carta:number) : number => {
+export const dameCartaAleatoria = (numero: number) : number => {
+    return numero >= 8
+        ? numero+2
+        : numero;
+}
+
+ export const calcularPuntuación = (carta:number) : number => {
     return carta <= 7 
-        ? carta
-        : 0.5;
+        ? carta + partida.puntuacionUsuario
+        : 0.5 + partida.puntuacionUsuario;
 }

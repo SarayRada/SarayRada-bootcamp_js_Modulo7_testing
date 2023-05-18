@@ -1,26 +1,22 @@
 import { partida, Estado } from "./modelo";
-import { cambiarEstado } from "./motor";
+import { cambiarEstado, dameCartaAleatoria, crearNumeroAleatorio, calcularPuntuación} from "./motor";
 
 export const insertarAlResultadoTexto = (textoAMostrar: string) => {
     const resultado = document.getElementById("resultado");
-    if (resultado && resultado instanceof HTMLElement) {
-        resultado.innerHTML = textoAMostrar
-    } else {
-        console.error("mostrarPuntuación: el elemento con id resultado no tiene valor");
-    }
+    resultado instanceof HTMLElement
+        ? resultado.innerHTML = textoAMostrar
+        : console.error("mostrarPuntuación: el elemento con id resultado no tiene valor");
 }
 
-export const sumarPuntuación = (number: number) => {
-    partida.puntuacionUsuario += number;
+export const setPuntuación = (number: number) => {
+    partida.puntuacionUsuario = number;
 }
 
 const imprimirCarta = (url: string) => {
-    const ElementoCarta = document.getElementById("imagen-carta");
-    if(ElementoCarta && ElementoCarta instanceof HTMLImageElement) {
-        ElementoCarta.src = url;
-    } else {
-        console.error("imprimirCarta: el elemento imagen-carta no se ha encontrado")
-    }
+    const elementoCarta = document.getElementById("imagen-carta");
+    elementoCarta instanceof HTMLImageElement
+        ? elementoCarta.src = url
+        : console.error("imprimirCarta: el elemento imagen-carta no se ha encontrado")
 }
 
 export const mostrarCarta = (carta: number) : void => {
@@ -95,7 +91,7 @@ export const mostrarMensajePosibleResultado = () => {
 }
 
 export const disabledButtonDameCarta = () :void =>{
-    const dameCarta = <HTMLButtonElement>document.getElementById("dameCarta");
+    const dameCarta = document.getElementById("dameCarta");
 
     dameCarta instanceof HTMLButtonElement
         ? dameCarta.disabled = true
@@ -104,7 +100,7 @@ export const disabledButtonDameCarta = () :void =>{
 }
 
 export const disabledButtonPlantarse = () :void =>{
-    const plantarse = <HTMLButtonElement>document.getElementById("plantarse");
+    const plantarse = document.getElementById("plantarse");
 
     plantarse instanceof HTMLButtonElement
         ?  plantarse.disabled = true
@@ -128,13 +124,14 @@ export const disabledButtonQueHubiesePasado = () => {
 };
 
 export const comprobarEstadoBotónDameCarta = () : boolean => {
-    const botón = <HTMLButtonElement>document.getElementById("dameCarta");
-
-    return botón.disabled
+    const botón = document.getElementById("dameCarta");
+    return botón && botón instanceof HTMLButtonElement
+        ? botón.disabled
+        : false
 }
 
 export const activarBotónNuevaPartida = (disabled: boolean) => {
-    if(disabled == true){
+    if(disabled){
         const botón = document.getElementById('nuevaPartida');
 
         botón instanceof HTMLButtonElement
@@ -165,11 +162,62 @@ export const activarBotones = () => {
     }
 }
 
-export const activarEstadoGameOver = () : Estado  => {
-    if(partida.puntuacionUsuario > 7.5){
-        disabledButtonDameCarta();
-        disabledButtonPlantarse();
-        return "GAME_OVER";
+const activarEstadoGameOver = () : Estado  => {
+    disabledButtonDameCarta();
+    disabledButtonPlantarse();
+    return "GAME_OVER";
+}
+
+document.addEventListener("DOMContentLoaded", mostrarPuntuación);
+
+const activarEstadoWinner = () => {
+    mostrarMensajePlantarse(cambiarEstado());
+    disabledButtonDameCarta();
+    disabledButtonPlantarse();
+    activarBotónNuevaPartida(comprobarEstadoBotónDameCarta());
+}
+
+export const comprobarPuntuación = () => {
+    if (partida.puntuacionUsuario == 7.5) {
+        activarEstadoWinner();
     }
-    return "KEEP_PLAYING";
+    if (partida.puntuacionUsuario > 7.5) {
+       mostrarMensajeGameOver(activarEstadoGameOver());
+       activarBotónNuevaPartida(comprobarEstadoBotónDameCarta());
+    }
+}
+
+export const jugarCarta = () => {
+    const cartaAleatoria = dameCartaAleatoria(crearNumeroAleatorio());
+    mostrarCarta(cartaAleatoria); 
+    setPuntuación(calcularPuntuación(cartaAleatoria));
+    mostrarPuntuación();
+    comprobarPuntuación();
+}
+
+export const plantase = () => {
+    const estadoActual = cambiarEstado();
+    mostrarMensajePlantarse(estadoActual);
+    disabledButtonDameCarta();
+    activarBotónNuevaPartida(comprobarEstadoBotónDameCarta());
+    activarBotónSaberMás();
+}
+
+export const nuevaPartida = () => {
+    activarBotones();
+    partida.puntuacionUsuario = 0;
+    mostrarPuntuación();
+    disabledButtonNuevaPartida();
+    disabledButtonQueHubiesePasado();
+    mostrarCarta(0);
+}
+
+export const saberMas = () => {
+    disabledButtonPlantarse();
+    const cartaAleatoria = dameCartaAleatoria(crearNumeroAleatorio());
+    mostrarCarta(cartaAleatoria);
+    setPuntuación(calcularPuntuación(cartaAleatoria));    
+    mostrarPuntuación();
+    mostrarMensajePosibleResultado();
+    disabledButtonQueHubiesePasado();
 }

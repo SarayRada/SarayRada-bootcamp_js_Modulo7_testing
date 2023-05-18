@@ -1,32 +1,24 @@
-import { cambiarEstado, dameCartaAleatoria, calcularPuntuaciónSegúnCarta} from "./motor";
+import { cambiarEstado, dameCartaAleatoria, calcularPuntuación, crearNumeroAleatorio} from "./motor";
 import { vi } from "vitest";
 import { partida, Estado } from "./modelo";
 
 describe("sumarPuntuación", () => {
-    afterEach(() => {
-        vi.clearAllMocks();
-        vi.resetAllMocks();
-    });
     it("Devuelve el valor de la carta cuando es menor a 7", () => {        
         const carta:number = 5;
         
-        const resultado = calcularPuntuaciónSegúnCarta(carta);
+        const resultado = calcularPuntuación(carta);
 
         expect(resultado).toBe(carta);
     });
     it("Devuelve 0.5 cuando la carta es mayor a 7", () => {        
         const carta:number = 8;
         
-        const resultado = calcularPuntuaciónSegúnCarta(carta);
+        const resultado = calcularPuntuación(carta);
 
         expect(resultado).toBe(0.5);
     });
 });
 describe("cambiarEstado", () => {
-    afterEach(() => {
-        vi.clearAllMocks();
-        vi.resetAllMocks();
-    });
     it("Devuelve CONSERVADOR cuando el valor es menor a 4", () => {
         const numeroAleatorio = 3.5;
           
@@ -74,21 +66,21 @@ describe("dameCartaAleatoria",() => {
     it("Si el math random me da un 0.8 devolverá 10", () => {
         vi.spyOn(Math, 'random').mockReturnValue(1);
 
-        const resultado: number = dameCartaAleatoria();
+        const resultado: number = dameCartaAleatoria(crearNumeroAleatorio());
 
         expect(resultado).toBe(12);
     });
     it("Si el math random me da un 0.9 devolverá 11", () => {
         vi.spyOn(Math, 'random').mockReturnValue(0.9);
 
-        const resultado:number = dameCartaAleatoria();
+        const resultado:number = dameCartaAleatoria(crearNumeroAleatorio());
 
         expect(resultado).toBe(11);
     });
     it("Si el math random me da un 1 devolverá 12", () => {
         vi.spyOn(Math, 'random').mockReturnValue(1);
 
-        const resultado:number = dameCartaAleatoria();
+        const resultado:number = dameCartaAleatoria(crearNumeroAleatorio());
 
         expect(resultado).toBe(12);
     });
@@ -96,7 +88,7 @@ describe("dameCartaAleatoria",() => {
         const numeroAleatorio:number = Math.floor(Math.random() * 8);
         vi.spyOn(Math, 'random').mockReturnValue(numeroAleatorio/10);
 
-        const resultado:number = dameCartaAleatoria();
+        const resultado:number = dameCartaAleatoria(crearNumeroAleatorio());
 
         expect(resultado).toBe(numeroAleatorio);
     });
