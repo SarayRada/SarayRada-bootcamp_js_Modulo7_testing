@@ -1,4 +1,4 @@
-import { cambiarEstado, dameCartaAleatoria, calcularPuntuación, crearNumeroAleatorio} from "./motor";
+import { cambiarEstado, dameCartaAleatoria, calcularPuntuación} from "./motor";
 import { vi } from "vitest";
 import { partida, Estado } from "./modelo";
 
@@ -63,33 +63,18 @@ describe("cambiarEstado", () => {
     });
 });
 describe("dameCartaAleatoria",() => {
-    it("Si el math random me da un 0.8 devolverá 10", () => {
-        vi.spyOn(Math, 'random').mockReturnValue(1);
+    it("Devuelve el mismo número que recibe si es menor o igual a 8", () => {
+        const numero = 5;
 
-        const resultado: number = dameCartaAleatoria(crearNumeroAleatorio());
+        const cartaAleatoria = dameCartaAleatoria(numero);
 
-        expect(resultado).toBe(12);
+        expect(cartaAleatoria).toBe(numero);
     });
-    it("Si el math random me da un 0.9 devolverá 11", () => {
-        vi.spyOn(Math, 'random').mockReturnValue(0.9);
+    it("Devuelve el número que recibe + 2 si es mayor a 8 ", () => {
+        const numero = 9;
 
-        const resultado:number = dameCartaAleatoria(crearNumeroAleatorio());
+        const cartaAleatoria = dameCartaAleatoria(numero);
 
-        expect(resultado).toBe(11);
-    });
-    it("Si el math random me da un 1 devolverá 12", () => {
-        vi.spyOn(Math, 'random').mockReturnValue(1);
-
-        const resultado:number = dameCartaAleatoria(crearNumeroAleatorio());
-
-        expect(resultado).toBe(12);
-    });
-    it("Si el math random me da un valor menor a 0.8 la solución será el mismo numero por 10", () => {
-        const numeroAleatorio:number = Math.floor(Math.random() * 8);
-        vi.spyOn(Math, 'random').mockReturnValue(numeroAleatorio/10);
-
-        const resultado:number = dameCartaAleatoria(crearNumeroAleatorio());
-
-        expect(resultado).toBe(numeroAleatorio);
-    });
+        expect(cartaAleatoria).toBe(numero+2);
+    })
 });
