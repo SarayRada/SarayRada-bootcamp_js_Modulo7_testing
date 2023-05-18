@@ -1,4 +1,4 @@
-import { cambiarEstado, dameCartaAleatoria, calcularPuntuación} from "./motor";
+import { cambiarEstado, dameCartaAleatoria, calcularPuntuación, crearNumeroAleatorio} from "./motor";
 import { vi } from "vitest";
 import { partida, Estado } from "./modelo";
 
@@ -76,5 +76,15 @@ describe("dameCartaAleatoria",() => {
         const cartaAleatoria = dameCartaAleatoria(numero);
 
         expect(cartaAleatoria).toBe(numero+2);
+    })
+});
+describe("crearNumeroAleatorio", () =>{
+    it("devuelve un número aleatorio menor a 10", () => {
+        const numero = Math.ceil(0.4*10)
+        vi.spyOn(Math, "random").mockReturnValue(0.4);
+        
+        const crearNumero = crearNumeroAleatorio();
+
+        expect(crearNumero).toBe(numero);
     })
 });
