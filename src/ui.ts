@@ -1,5 +1,5 @@
 import { partida, Estado } from "./modelo";
-import { cambiarEstado, dameCartaAleatoria, crearNumeroAleatorio, calcularPuntuación} from "./motor";
+import { obtenerEstado, dameCartaAleatoria, crearNumeroAleatorio, calcularPuntuación} from "./motor";
 
 export const insertarAlResultadoTexto = (textoAMostrar: string) => {
     const resultado = document.getElementById("resultado");
@@ -171,7 +171,7 @@ const activarEstadoGameOver = () : Estado  => {
 document.addEventListener("DOMContentLoaded", mostrarPuntuación);
 
 const activarEstadoWinner = () => {
-    mostrarMensajePlantarse(cambiarEstado());
+    mostrarMensajePlantarse(obtenerEstado());
     disabledButtonDameCarta();
     disabledButtonPlantarse();
     activarBotónNuevaPartida(comprobarEstadoBotónDameCarta());
@@ -196,7 +196,7 @@ export const jugarCarta = () => {
 }
 
 export const plantase = () => {
-    const estadoActual = cambiarEstado();
+    const estadoActual = obtenerEstado();
     mostrarMensajePlantarse(estadoActual);
     disabledButtonDameCarta();
     activarBotónNuevaPartida(comprobarEstadoBotónDameCarta());

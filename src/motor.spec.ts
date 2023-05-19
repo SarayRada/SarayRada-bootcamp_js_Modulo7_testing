@@ -1,4 +1,4 @@
-import { cambiarEstado, dameCartaAleatoria, calcularPuntuación, crearNumeroAleatorio} from "./motor";
+import { obtenerEstado, dameCartaAleatoria, calcularPuntuación, crearNumeroAleatorio} from "./motor";
 import { vi } from "vitest";
 import { partida, Estado } from "./modelo";
 
@@ -24,7 +24,7 @@ describe("cambiarEstado", () => {
           
         vi.spyOn(partida, "puntuacionUsuario", "get").mockReturnValue(numeroAleatorio);
 
-        const estado: Estado = cambiarEstado();
+        const estado: Estado = obtenerEstado();
 
         expect(estado).toBe("CONSERVADOR");
         
@@ -33,7 +33,7 @@ describe("cambiarEstado", () => {
         const numeroAleatorio = 4;
         vi.spyOn(partida, "puntuacionUsuario", "get").mockReturnValue(numeroAleatorio);
 
-        const estado: Estado = cambiarEstado();
+        const estado: Estado = obtenerEstado();
 
         expect(estado).toBe("CAGUETA");
 
@@ -42,14 +42,14 @@ describe("cambiarEstado", () => {
         const numeroAleatorio = 7;
         vi.spyOn(partida, "puntuacionUsuario", "get").mockReturnValue(numeroAleatorio);
 
-        const estado: Estado = cambiarEstado();
+        const estado: Estado = obtenerEstado();
 
         expect(estado).toBe("CASI");
     });
     it("Devuelve WINNER cuando el valor es igual a 7.5", () => {
         vi.spyOn(partida, "puntuacionUsuario", "get").mockReturnValue(7.5);
 
-        const estado: Estado = cambiarEstado();
+        const estado: Estado = obtenerEstado();
 
         expect(estado).toBe("WINNER");
     });
@@ -57,7 +57,7 @@ describe("cambiarEstado", () => {
         const numeroAleatorio = 9;
         vi.spyOn(partida, "puntuacionUsuario", "get").mockReturnValue(numeroAleatorio);
 
-        const estado: Estado = cambiarEstado();
+        const estado: Estado = obtenerEstado();
 
         expect(estado).toBe("GAME_OVER");
     });

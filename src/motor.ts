@@ -1,7 +1,7 @@
 import { partida, Estado } from "./modelo";
 
 
-export const cambiarEstado = () : Estado => {
+export const obtenerEstado = () : Estado => {
     if (partida.puntuacionUsuario < 4) {
         return "CONSERVADOR";
     }
@@ -11,11 +11,9 @@ export const cambiarEstado = () : Estado => {
     if (partida.puntuacionUsuario >= 6 && partida.puntuacionUsuario <= 7 ){
         return "CASI";
     }
-    if (partida.puntuacionUsuario == 7.5 ){
-        return "WINNER";
-    }
-    else 
-        return "GAME_OVER";
+    return partida.puntuacionUsuario == 7.5 
+    ? "WINNER"
+    : "GAME_OVER";
 }
 
 export const crearNumeroAleatorio = () : number => {
