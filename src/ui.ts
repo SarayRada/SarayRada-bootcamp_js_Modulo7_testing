@@ -1,15 +1,11 @@
-import { partida, Estado } from "./modelo";
+import { partida, Estado, setPuntuación } from "./modelo";
 import { obtenerEstado, dameCartaAleatoria, crearNumeroAleatorio, calcularPuntuación} from "./motor";
 
-export const insertarAlResultadoTexto = (textoAMostrar: string) => {
+const insertarAlResultadoTexto = (textoAMostrar: string) => {
     const resultado = document.getElementById("resultado");
     resultado instanceof HTMLElement
         ? resultado.innerHTML = textoAMostrar
         : console.error("insertarAlResultadoTexto: el elemento con id resultado no tiene valor");
-}
-
-export const setPuntuación = (number: number) => {
-    partida.puntuacionUsuario = number;
 }
 
 const imprimirCarta = (url: string) => {
@@ -19,7 +15,7 @@ const imprimirCarta = (url: string) => {
         : console.error("imprimirCarta: el elemento imagen-carta no se ha encontrado")
 }
 
-export const mostrarCarta = (carta: number) : void => {
+const mostrarCarta = (carta: number) : void => {
     switch(carta){               
             case 1:
                 imprimirCarta("../img/1_as-copas.jpg");
@@ -56,7 +52,7 @@ export const mostrarCarta = (carta: number) : void => {
     }
 }
 
-export const mostrarMensajeSegúnEstado = (estado: Estado) => {
+const mostrarMensajeSegúnEstado = (estado: Estado) => {
     switch(estado){
         case "CONSERVADOR":
             insertarAlResultadoTexto("Has sido muy conservador.");
@@ -112,7 +108,7 @@ const cambiarEstadoBotónQueHubiesePasado = (enabled: boolean) => {
         : console.error("disabledButtonQueHubiesePasado: el elemento con id queHubiesePasado no se ha encontrado")
 };
 
-export const comprobarEstadoBotónDameCarta = () : boolean => {
+const comprobarEstadoBotónDameCarta = () : boolean => {
     const botón = document.getElementById("dameCarta");
     return botón && botón instanceof HTMLButtonElement
         ? botón.disabled
@@ -133,7 +129,7 @@ const partidaPerdida = () => {
     cambiarEstadoBotónNuevaPartida(comprobarEstadoBotónDameCarta());
 }
 
-export const comprobarPuntuación = () => {
+const comprobarPuntuación = () => {
     if (partida.puntuacionUsuario == 7.5) {
         partidaGanada();
     }

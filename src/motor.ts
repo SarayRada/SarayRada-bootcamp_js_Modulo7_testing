@@ -12,8 +12,8 @@ export const obtenerEstado = () : Estado => {
         return "CASI";
     }
     return partida.puntuacionUsuario == 7.5 
-    ? "WINNER"
-    : "GAME_OVER";
+        ? "WINNER"
+        : "GAME_OVER";
 }
 
 export const crearNumeroAleatorio = () : number => {

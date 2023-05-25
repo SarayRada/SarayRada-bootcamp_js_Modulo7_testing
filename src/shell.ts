@@ -5,8 +5,8 @@ import {
     saberMas
 } from "./ui";
 
-
-const botonDarCarta = document.getElementById("dameCarta");
+const iniciarPartida = () => {
+    const botonDarCarta = document.getElementById("dameCarta");
 botonDarCarta instanceof HTMLButtonElement
     ? botonDarCarta.addEventListener("click", jugarCarta)
     : console.error("botonComprobar: elemento dameCarta no existe");
@@ -25,3 +25,6 @@ const botonSaberMas = document.getElementById("queHubiesePasado");
 botonSaberMas instanceof HTMLButtonElement
     ? botonSaberMas.addEventListener("click", saberMas)
     : console.error("botonPlantarse: elemento plantarse no existe");
+};
+
+addEventListener("DOMContentLoaded", iniciarPartida);
