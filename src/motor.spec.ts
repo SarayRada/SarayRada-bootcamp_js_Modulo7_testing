@@ -86,13 +86,27 @@ describe("dameCartaAleatoria",() => {
 
         expect(cartaAleatoria).toBe(numero);
     });
+    it("Devuelve el mismo número que recibe si es menor o igual a 8", () => {
+        const numero = -200;
+
+        const cartaAleatoria = dameCartaAleatoria(numero);
+
+        expect(cartaAleatoria).toBe(numero);
+    });
     it("Devuelve el número que recibe + 2 si es mayor a 8 ", () => {
         const numero = 9;
 
         const cartaAleatoria = dameCartaAleatoria(numero);
 
         expect(cartaAleatoria).toBe(numero+2);
-    })
+    });
+    it("Devuelve el número que recibe + 2 si es mayor a 8 ", () => {
+        const numero = 10000;
+
+        const cartaAleatoria = dameCartaAleatoria(numero);
+
+        expect(cartaAleatoria).toBe(10000+2);
+    });
 });
 describe("crearNumeroAleatorio", () =>{
     it("devuelve un número aleatorio menor a 10", () => {
@@ -102,5 +116,45 @@ describe("crearNumeroAleatorio", () =>{
         const crearNumero = crearNumeroAleatorio();
 
         expect(crearNumero).toBe(numero);
-    })
+    });
+    it("devuelve 10 cuando el marh.random devuelve un número mayor a 0.9", () => {
+        const numero = 10;
+        vi.spyOn(Math, "random").mockReturnValue(0.999999);
+        
+        const crearNumero = crearNumeroAleatorio();
+
+        expect(crearNumero).toBe(numero);
+    });
+    it("devuelve 8 cuando el marh.random devuelve un número entre 0.71 y 0.8", () => {
+        const numero = 8;
+        vi.spyOn(Math, "random").mockReturnValue(0.8);
+        
+        const crearNumero = crearNumeroAleatorio();
+
+        expect(crearNumero).toBe(numero);
+    });
+    it("devuelve 1 cuando el marh.random devuelve un número entre 0.01 y 0.1", () => {
+        const numero = 1;
+        vi.spyOn(Math, "random").mockReturnValue(0.06);
+        
+        const crearNumero = crearNumeroAleatorio();
+
+        expect(crearNumero).toBe(numero);
+    });
+    it("devuelve 6 cuando el marh.random devuelve un número entre 0.51 y 0.6", () => {
+        const numero = 6;
+        vi.spyOn(Math, "random").mockReturnValue(0.52);
+        
+        const crearNumero = crearNumeroAleatorio();
+
+        expect(crearNumero).toBe(numero);
+    });
+    it("devuelve 0 cuando el marh.random devuelve 0", () => {
+        const numero = 0;
+        vi.spyOn(Math, "random").mockReturnValue(0);
+        
+        const crearNumero = crearNumeroAleatorio();
+
+        expect(crearNumero).toBe(numero);
+    });
 });
