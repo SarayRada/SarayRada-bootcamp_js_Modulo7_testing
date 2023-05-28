@@ -3,19 +3,35 @@ import { vi } from "vitest";
 import { partida, Estado } from "./modelo";
 
 describe("sumarPuntuación", () => {
-    it("Devuelve el valor de la carta cuando es menor a 7", () => {        
+    it("Devuelve el valor de la carta cuando es menor a 7 y la puntuación es 0", () => {        
         const carta:number = 5;
         
         const resultado = calcularPuntuación(carta);
 
         expect(resultado).toBe(carta);
     });
-    it("Devuelve 0.5 cuando la carta es mayor a 7", () => {        
+    it("Devuelve 0.5 cuando la carta es mayor a 7 y la puntuación es 0", () => {        
         const carta:number = 8;
         
         const resultado = calcularPuntuación(carta);
 
         expect(resultado).toBe(0.5);
+    });
+    it("Devuelve la Suma de la puntuación + 0.5 cuando la carta es mayor a 7", () => {        
+        const carta:number = 8;
+        vi.spyOn(partida, "puntuacionUsuario", "get").mockReturnValue(4);
+        
+        const resultado = calcularPuntuación(carta);
+
+        expect(resultado).toBe(4.5);
+    });
+    it("Devuelve la Suma de la puntuación + el valor de la carta cuando es menor o igual a 7", () => {        
+        const carta:number = 7;
+        vi.spyOn(partida, "puntuacionUsuario", "get").mockReturnValue(4);
+        
+        const resultado = calcularPuntuación(carta);
+
+        expect(resultado).toBe(11);
     });
 });
 describe("cambiarEstado", () => {
