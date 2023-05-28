@@ -80,7 +80,7 @@ describe("dameCartaAleatoria",() => {
 });
 describe("crearNumeroAleatorio", () =>{
     it("devuelve un número aleatorio menor a 10", () => {
-        const numero = Math.ceil(0.4*10)
+        const numero = 4;
         vi.spyOn(Math, "random").mockReturnValue(0.4);
         
         const crearNumero = crearNumeroAleatorio();
