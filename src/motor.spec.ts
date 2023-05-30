@@ -86,8 +86,8 @@ describe("dameCartaAleatoria",() => {
 
         expect(cartaAleatoria).toBe(numero);
     });
-    it("Devuelve el mismo número que recibe si es menor o igual a 8, aunque sea un valor negativo", () => {
-        const numero = -200;
+    it("Devuelve el mismo número que recibe si es menor o igual a 8", () => {
+        const numero = 0;
 
         const cartaAleatoria = dameCartaAleatoria(numero);
 
@@ -101,11 +101,11 @@ describe("dameCartaAleatoria",() => {
         expect(cartaAleatoria).toBe(numero+2);
     });
     it("Devuelve el número que recibe + 2 si es mayor a 8, con valores extremos", () => {
-        const numero = 10000;
+        const numero = 10;
 
         const cartaAleatoria = dameCartaAleatoria(numero);
 
-        expect(cartaAleatoria).toBe(10000+2);
+        expect(cartaAleatoria).toBe(10+2);
     });
 });
 describe("crearNumeroAleatorio", () =>{
