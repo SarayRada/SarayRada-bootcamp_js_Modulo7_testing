@@ -10,6 +10,13 @@ describe("sumarPuntuación", () => {
 
         expect(resultado).toBe(carta);
     });
+    it("Devuelve el valor de la carta cuando es 0 y la puntuación es 0", () => {        
+        const carta:number = 0;
+        
+        const resultado = calcularPuntuación(carta);
+
+        expect(resultado).toBe(carta);
+    });
     it("Devuelve 0.5 cuando la carta es mayor a 7 y la puntuación es 0", () => {        
         const carta:number = 8;
         
